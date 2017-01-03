@@ -5,6 +5,7 @@ import requests
 
 
 DEVMAN_API = "https://devman.org/api/challenges/solution_attempts"
+LAST_NIGHT_HOUR = 6
 
 
 def load_attempts():
@@ -25,7 +26,7 @@ def get_midnighters(attempts):
     for attempt in attempts:
         local_datetime = get_local_datetime(attempt['timestamp'],
                                             attempt['timezone'])
-        if local_datetime and local_datetime.hour in range(0, 6):
+        if local_datetime and local_datetime.hour in range(LAST_NIGHT_HOUR):
             yield attempt['username'], local_datetime
 
 
